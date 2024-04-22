@@ -4,4 +4,7 @@ export const apirequests = {
     getNetflixOriginals: `discover/tv?api_key=${API_KEY}&language=en-US&page=1&with_networks=213`,
 }
 
+export const image_base_url = `https://image.tmdb.org/t/p/original`;
+
+
 
