@@ -20,7 +20,7 @@ function Homescreen(props) {
 
     return (
         <>
-            <Header video={data?.results[Math.floor(Math.random() * data?.results.length)]} />
+            <Header video={data?.results[Math.floor(Math.random() * data?.results.length)]} platform={platformType.tv} />
             <div className="container-fluid">
                 <Row title="Upcoming Movies" action={fetchUpcomingMovies} selector={upcomingMoviesSelector} platformType={platformType.movie} />
 

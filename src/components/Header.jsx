@@ -5,16 +5,17 @@ import { fetchHeaderVideo, headerVideoSelector } from '../features/common/common
 import GenreLink from './GenreLink';
 import Ratings from './Ratings';
 import VideoPlayer from './VideoPlayer';
+import { Link } from 'react-router-dom';
 
 function Header(props) {
     const [showPlayer, setShowPlayer] = useState(false);
-    const { video } = props;
+    const { video, platform } = props;
     const { data, status, error } = useSelector(headerVideoSelector);
 
     const dispatch = useDispatch();
     useEffect(() => {
         if (video) {
-            dispatch(fetchHeaderVideo({ platform: "tv", id: video.id }));
+            dispatch(fetchHeaderVideo({ platform: platform, id: video.id }));
         }
     }, [video])
 
@@ -36,7 +37,7 @@ function Header(props) {
                             <GenreLink genres={data?.genres} />
                             <Ratings voteAverage={data?.vote_average} voteCount={data?.vote_count} />
                             <button className='btn btn-danger' onClick={showVideo}>Play</button>
-                            <button className='btn btn-warning ms-2'>More Info</button>
+                            <Link to={`/details/${platform}/${data?.id}`} className='btn btn-warning ms-2'>More Info</Link>
                         </div>
 
                         <div className='header-vignette'></div>

@@ -15,10 +15,10 @@ function Navbar(props) {
                             <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="#">Tv Shows</Link>
+                            <Link className="nav-link" to="/browse/tv">Tv Shows</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="#">Movies</Link>
+                            <Link className="nav-link" to="/browse/movie">Movies</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="#">Browse By Genre</Link>
