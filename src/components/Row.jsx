@@ -1,19 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useDispatch, useSelector } from 'react-redux';
 import { netflixOriginalsSelector } from '../features/tv/tvSlice';
 import Card from './Card';
 import { fetchUpcomingMovies, upcomingMoviesSelector } from '../features/movie/movieSlice';
+import { apirequests } from '../utility/apireqeusts';
+import axios from '../utility/axios';
 
 function Row(props) {
-    const { title, action, selector, platformType } = props;
-    const collection = useSelector(selector);
+    const { title, action, selector, platformType, genre } = props;
+    const collection = useSelector(!genre ? selector : (state) => state);
     const dispatch = useDispatch();
+    const [videoByGenre, setVideoByGenre] = useState(null);
+
+    const fetchVideoByGenre = async (platform, genreid) => {
+        const response = await axios.get(apirequests.getVideoByGenre(platform, genreid));
+        setVideoByGenre(response.data.results);
+    }
 
     useEffect(() => {
-        dispatch(action())
-    }, [])
+        if (genre) {
+            fetchVideoByGenre(platformType, genre.id)
+        }
+    }, [genre])
+
+
+    useEffect(() => {
+        if (!genre) {
+            dispatch(action())
+        }
+    }, [genre])
 
     return (
         <div className='py-3'>
@@ -24,9 +41,14 @@ function Row(props) {
                 slidesPerView={5}
             >
                 {
-                    collection.data?.results.map((video) => {
-                        return <SwiperSlide><Card video={video} platformType={platformType} /></SwiperSlide>
-                    })
+                    genre ?
+                        videoByGenre?.map((video) => {
+                            return <SwiperSlide><Card video={video} platformType={platformType} /></SwiperSlide>
+                        })
+                        :
+                        collection.data?.results.map((video) => {
+                            return <SwiperSlide><Card video={video} platformType={platformType} /></SwiperSlide>
+                        })
                 }
             </Swiper>
         </div>
