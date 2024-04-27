@@ -16,6 +16,7 @@ function Row(props) {
 
     const fetchVideoByGenre = async (platform, genreid) => {
         const response = await axios.get(apirequests.getVideoByGenre(platform, genreid));
+        console.log(response);
         setVideoByGenre(response.data.results);
     }
 
