@@ -34,7 +34,7 @@ function Header(props) {
                         <div className='caption'>
                             <h1 className='title display-3'>{data?.name || data?.original_name || data?.title || data?.original_title}</h1>
                             <p className='lead'>{data?.overview}</p>
-                            <GenreLink genres={data?.genres} />
+                            <GenreLink genres={data?.genres} platform={platform} />
                             <Ratings voteAverage={data?.vote_average} voteCount={data?.vote_count} />
                             <button className='btn btn-danger' onClick={showVideo}>Play</button>
                             <Link to={`/details/${platform}/${data?.id}`} className='btn btn-warning ms-2'>More Info</Link>

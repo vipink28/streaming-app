@@ -1,7 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { queryString } from '../features/common/commonSlice';
+import { useDispatch } from 'react-redux';
 
 function Navbar(props) {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const handleSearch = (e) => {
+        let value = e.target.value;
+        if (value.length > 2) {
+            dispatch(queryString(value));
+            navigate('/search');
+        }
+    }
+
     return (
         <nav className="navbar navbar-expand-lg">
             <div className="container-fluid">
@@ -21,11 +33,11 @@ function Navbar(props) {
                             <Link className="nav-link" to="/browse/movie">Movies</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="#">Browse By Genre</Link>
+                            <Link className="nav-link" to="browsebygenre/movie/28">Browse By Genre</Link>
                         </li>
                     </ul>
                     <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                        <input className="form-control me-2" onChange={handleSearch} type="search" placeholder="Search" aria-label="Search" />
                         <button className="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>

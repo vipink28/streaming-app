@@ -5,7 +5,8 @@ export const apirequests = {
     getCollections: (platform, endpoint) => { return `${platform}/${endpoint}?api_key=${API_KEY}&language=en-US&page=1` },
     getDetails: (platform, id) => `${platform}/${id}?api_key=${API_KEY}&append_to_response=videos,credits,recommendations,similar`,
     getGenreList: (platform) => `/genre/${platform}/list?api_key=${API_KEY}`,
-    getVideoByGenre: (platform, genreId) => `discover/${platform}?api_key=${API_KEY}&language=en-US&page=1&with_genres=${genreId}`
+    getVideoByGenre: (platform, genreId) => `discover/${platform}?api_key=${API_KEY}&language=en-US&page=1&with_genres=${genreId}`,
+    getSearch: (platform, query) => `search/${platform}?api_key=${API_KEY}&language=en-US&query=${query}`
 }
 
 export const image_base_url = `https://image.tmdb.org/t/p/original`;
